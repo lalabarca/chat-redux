@@ -45,6 +45,8 @@ class MessageList extends Component {
         <div className="message-list">
           <p>There are no messages yet</p>
           <MessageForm />
+          <div style={style}>
+          </div>
         </div>
       );
     } else {
