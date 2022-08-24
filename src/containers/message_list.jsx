@@ -11,6 +11,23 @@ import { fetchMessages } from '../actions';
 
 class MessageList extends Component {
   componentWillMount() {
+    this.fetchMessages();
+  }
+
+  componentDidMount() {
+    this.refresher = setInterval(this.fetchMessages, 3000);
+  }
+
+  componentDidUpdate() {
+    // find a way to select DOM element with ref and use scrollTop or scrollTo
+    // window.scrollTo(0, document.body.scrollHeight);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.refresher);
+  }
+
+  fetchMessages = () => {
     this.props.fetchMessages(this.props.selectedChannel);
   }
 
@@ -25,8 +42,8 @@ class MessageList extends Component {
     }
 
     return (
-      <div className="">
-        {this.props.messages.map((message) => <Message message={message} key={message.created_at}/>)}
+      <div className="message-list">
+        {this.props.messages.map((message) => <Message message={message} key={message.id}/>)}
         <MessageForm />
       </div>
     );

@@ -12,11 +12,9 @@ import '../assets/stylesheets/application.scss';
 
 // importing reducers
 import messagesReducer from './reducers/messages_reducer';
-import channelsReducer from './reducers/channels_reducer';
 import selectedChannelReducer from './reducers/selected_channel_reducer';
-import currentUsernameReducer from './reducers/current_username_reducer';
 
-// Initial state
+// Initial state (before)
 const fakeMessages =
   [
     {
@@ -32,18 +30,20 @@ const fakeMessages =
   ];
 
 const initialState = {
-  messages: fakeMessages,
+  messages: [],
   channels: ['general', 'react', 'paris'],
   selectedChannel: 'general',
   currentUsername: prompt("What is your username?") || `anonymous${Math.floor(10 + (Math.random() * 90))}`
 };
 
 // Reducers
+const identyReducer = (state = null) => state;
+
 const reducers = combineReducers({
   messages: messagesReducer,
-  channels: channelsReducer,
+  channels: identyReducer,
   selectedChannel: selectedChannelReducer,
-  currentUsername: currentUsernameReducer
+  currentUsername: identyReducer
 });
 
 // Middlewares

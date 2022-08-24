@@ -3,12 +3,11 @@ export const FETCH_MESSAGES = 'FETCH_MESSAGES';
 export const CREATE_MESSAGES = 'CREATE_MESSAGES';
 
 export function fetchMessages(channel) {
-  return fetch(`https://wagon-chat.herokuapp.com/${channel}/messages`).then(response => response.json()).then((data) => {
+  const promise = fetch(`https://wagon-chat.herokuapp.com/${channel}/messages`).then(r => r.json());
     return {
       type: FETCH_MESSAGES,
-      payload: data.messages
+      payload: promise
     };
-  });
 }
 
 export function createMessage(channel, author, content) {
