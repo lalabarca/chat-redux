@@ -10,11 +10,20 @@ import MessageForm from "./message_form";
 import { fetchMessages } from '../actions';
 
 class MessageList extends Component {
-  // componentWillMount() {
-  //   this.props.fetchMessages(this.props.selectedChannel);
-  // }
+  componentWillMount() {
+    this.props.fetchMessages(this.props.selectedChannel);
+  }
 
   render() {
+    if (this.props.messages.length === 0) {
+      return (
+        <div className="">
+          <p>There are no messages yet</p>
+          <MessageForm />
+        </div>
+      );
+    }
+
     return (
       <div className="">
         {this.props.messages.map((message) => <Message message={message} key={message.created_at}/>)}
@@ -24,15 +33,15 @@ class MessageList extends Component {
   }
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ fetchMessages }, dispatch);
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchMessages }, dispatch);
+}
 
 function mapStateToProps(state) {
   return {
     messages: state.messages,
-    // selectedChannel: state.selectedChannel
+    selectedChannel: state.selectedChannel
   };
 }
 
-export default connect(mapStateToProps, null)(MessageList);
+export default connect(mapStateToProps, mapDispatchToProps)(MessageList);
