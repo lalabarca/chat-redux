@@ -30,3 +30,7 @@ export function createMessage(channel, author, content) {
     payload: promise
   };
 }
+
+export function selectChannel(params) {
+
+}

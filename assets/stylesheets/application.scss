@@ -4,4 +4,23 @@ body {
 .app {
   margin-top: 20px;
   margin-bottom: 20px;
+  display: flex;
+}
+
+.channel-list {
+  width: 30%;
+
+  ul {
+    list-style: none;
+    margin: none;
+  }
+
+  li.active {
+    font-weight: bold;
+    color: rgb(219, 29, 63);
+  }
+}
+
+.message-list {
+  width: 70%;
 }

@@ -10,17 +10,19 @@ import MessageForm from "./message_form";
 import { fetchMessages } from '../actions';
 
 class MessageList extends Component {
+
+  // const messagesEndRef = React.createRef();
+
   componentWillMount() {
     this.fetchMessages();
   }
 
   componentDidMount() {
-    this.refresher = setInterval(this.fetchMessages, 3000);
+    this.refresher = setInterval(this.fetchMessages, 2000);
   }
 
   componentDidUpdate() {
-    // find a way to select DOM element with ref and use scrollTop or scrollTo
-    // window.scrollTo(0, document.body.scrollHeight);
+    this.scrollToBottom();
   }
 
   componentWillUnmount() {
@@ -31,22 +33,31 @@ class MessageList extends Component {
     this.props.fetchMessages(this.props.selectedChannel);
   }
 
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+
   render() {
+    const style = { float: "left", clear: "both" };
+
     if (this.props.messages.length === 0) {
       return (
-        <div className="">
+        <div className="message-list">
           <p>There are no messages yet</p>
           <MessageForm />
         </div>
       );
-    }
-
-    return (
-      <div className="message-list">
-        {this.props.messages.map((message) => <Message message={message} key={message.id}/>)}
-        <MessageForm />
-      </div>
-    );
+    } else {
+        return (
+          <div className="message-list">
+            {this.props.messages.map((message) => <Message message={message} key={message.id}/>)}
+            <MessageForm />
+            <div style={style}
+              ref={(el) => { this.messagesEnd = el; }}>
+            </div>
+          </div>
+        );
+      }
   }
 }
 
