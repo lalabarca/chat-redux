@@ -4,7 +4,7 @@ import ChannelList from "../containers/channel_list";
 
 const App = () => {
   return (
-    <div className="app">
+    <div className="app container">
       <ChannelList />
       <MessageList />
     </div>

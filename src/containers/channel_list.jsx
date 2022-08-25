@@ -13,17 +13,21 @@ class ChannelList extends Component {
     return null;
   }
 
-  // handleClick = (channel) => {
-  //   this.props.selectChannel(channel);this.handleClick(channel)
-  // }
+  handleClick = (channel) => {
+    this.props.selectChannel(channel);
+  }
+
+  renderChannel = (channel) => {
+    return (
+      <li className={this.activeChannel(channel)} key={channel[0]} onClick={() => this.handleClick(channel)}>#{channel}</li>
+    );
+  }
 
   render() {
     return(
       <div className='channel-list'>
         <ul>
-          {this.props.channels.map((channel) =>
-              <li className={this.activeChannel(channel)} key={channel[0]} >#{channel}</li>
-          )}
+          {this.props.channels.map((channel) => this.renderChannel(channel))}
         </ul>
       </div>
     );

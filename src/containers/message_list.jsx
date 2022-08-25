@@ -9,8 +9,7 @@ import MessageForm from "./message_form";
 // Import Actions
 import { fetchMessages } from '../actions';
 
-class MessageList extends Component {
-
+class MessageList extends Component{
   // const messagesEndRef = React.createRef();
 
   componentWillMount() {
@@ -18,12 +17,12 @@ class MessageList extends Component {
   }
 
   componentDidMount() {
-    this.refresher = setInterval(this.fetchMessages, 2000);
+    this.refresher = setInterval(this.fetchMessages, 5000);
   }
 
-  componentDidUpdate() {
-    this.scrollToBottom();
-  }
+  // componentDidUpdate() {
+  //   this.scrollToBottom();
+  // }
 
   componentWillUnmount() {
     clearInterval(this.refresher);
@@ -43,23 +42,25 @@ class MessageList extends Component {
     if (this.props.messages.length === 0) {
       return (
         <div className="message-list">
+          <h2><strong>#{this.props.selectedChannel}</strong></h2>
           <p>There are no messages yet</p>
           <MessageForm />
-          <div style={style}>
-          </div>
+          {/* <div style={style}>
+          </div> */}
         </div>
       );
-    } else {
-        return (
-          <div className="message-list">
-            {this.props.messages.map((message) => <Message message={message} key={message.id}/>)}
-            <MessageForm />
-            <div style={style}
-              ref={(el) => { this.messagesEnd = el; }}>
-            </div>
-          </div>
-        );
-      }
+    }
+
+    return (
+      <div className="message-list">
+        <h2><strong>#{this.props.selectedChannel}</strong></h2>
+        {this.props.messages.map((message) => <Message message={message} key={message.id}/>)}
+        <MessageForm />
+        {/* <div style={style}
+          ref={(el) => { this.messagesEnd = el; }}>
+        </div> */}
+      </div>
+    );
   }
 }
 
