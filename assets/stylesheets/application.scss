@@ -1,17 +1,32 @@
+html { font-size: 16px;}
 body {
   font-family: Helvetica;
 }
+
 .app {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  display: flex;
+  height: 100vh;
 }
 
 .channel-list {
-  width: 30%;
+  padding: 2rem 0;
+  width: 250px;
+  box-sizing: border-box;
+  height: 100%;
+  background: #f4f4f4;
 
   ul {
     list-style: none;
     margin: none;
+
+    li {
+      cursor: pointer;
+      margin-top: 10px;
+
+      &:first-child {
+        margin: 0;
+      }
+    }
   }
 
   li.active {
@@ -20,15 +35,46 @@ body {
   }
 }
 
+.messages-container {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 250px);
+}
+
+.channel-title {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding-left: 2rem;
+  height: 70px;
+  width: 100%;
+  border-bottom: 1px solid #f4f4f4;
+  color: #cf00c;
+
+  p {
+    margin-bottom: 0;
+    font-size: 0.7rem;
+  }
+}
+
 .message-list {
-  width: 70%;
+  height: 100%;
+  overflow: scroll;
+  box-sizing: border-box;
+  padding: 2rem 0 0 2rem;
 }
 
 .single-message {
-  p:last-child {
-    font-style: italic;
-    font-weight: 0.6rem;
+  margin-bottom: 1rem;
+  p {
+    font-size: 1.4rem;
   }
+}
+
+.search {
+  padding: 2rem 2rem 0 2rem;
+  box-sizing: border-box;
+  border-top: 1px solid #f4f4f4;
 }
 
 .search-form-control {

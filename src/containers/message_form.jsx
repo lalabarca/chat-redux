@@ -11,6 +11,9 @@ class MessageForm extends Component {
     this.state = { value: '' };
   }
 
+  componentDidMount() {
+    this.messageBox.focus();
+  }
 
   handleChange = (event) => {
     this.setState({ value: event.target.value });
@@ -26,7 +29,7 @@ class MessageForm extends Component {
     return (
       <form onSubmit={this.handleSubmit} className="simple_form search">
         <div className="search-form-control form-group">
-          <input type="text" value={this.state.value} onChange={this.handleChange} className="form-control" />
+          <input type="text" value={this.state.value} onChange={this.handleChange} className="form-control" ref={(messageBox) => { this.messageBox = messageBox; }} />
           <button type="submit" className="btn btn-flat">Envoyer</button>
         </div>
       </form>

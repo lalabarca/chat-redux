@@ -10,8 +10,6 @@ import MessageForm from "./message_form";
 import { fetchMessages } from '../actions';
 
 class MessageList extends Component{
-  // const messagesEndRef = React.createRef();
-
   componentWillMount() {
     this.fetchMessages();
   }
@@ -20,9 +18,9 @@ class MessageList extends Component{
     this.refresher = setInterval(this.fetchMessages, 5000);
   }
 
-  // componentDidUpdate() {
-  //   this.scrollToBottom();
-  // }
+  componentDidUpdate() {
+    this.list.scrollTop = this.list.scrollHeight;
+  }
 
   componentWillUnmount() {
     clearInterval(this.refresher);
@@ -32,33 +30,20 @@ class MessageList extends Component{
     this.props.fetchMessages(this.props.selectedChannel);
   }
 
-  scrollToBottom = () => {
-    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  capitalize = (str) => {
+    return str[0].toUpperCase() + str.substring(1)
   }
 
   render() {
-    const style = { float: "left", clear: "both" };
-
-    if (this.props.messages.length === 0) {
-      return (
-        <div className="message-list">
-          <h2><strong>#{this.props.selectedChannel}</strong></h2>
-          <p>There are no messages yet</p>
-          <MessageForm />
-          {/* <div style={style}>
-          </div> */}
-        </div>
-      );
-    }
-
     return (
-      <div className="message-list">
-        <h2><strong>#{this.props.selectedChannel}</strong></h2>
-        {this.props.messages.map((message) => <Message message={message} key={message.id}/>)}
+      <div className="messages-container">
+        <div className="channel-title">
+          <p><strong>#{this.capitalize(this.props.selectedChannel)}</strong></p>
+        </div>
+        <div className="message-list" ref={(list) => { this.list = list; }}>
+          {this.props.messages.map((message) => <Message message={message} key={message.id}/>)}
+        </div>
         <MessageForm />
-        {/* <div style={style}
-          ref={(el) => { this.messagesEnd = el; }}>
-        </div> */}
       </div>
     );
   }
